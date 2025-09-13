@@ -6,6 +6,7 @@ import HomeIcon from 'assets/icons/home.svg?react';
 import InfoIcon from 'assets/icons/info.svg?react';
 import ProjectsIcon from 'assets/icons/projects.svg?react';
 import ContactIcon from 'assets/icons/contact.svg?react';
+import { SparklesCore } from 'components/ui/sparkles';  
 
 
 
@@ -19,9 +20,28 @@ function App() {
 
   return (
     <>
-      <div className="relative min-h-screen bg-black text-white overflow-hidden flex flex-col">
-        <Home />
-        <FloatingDock items={items}/>
+      <div className="w-full h-full bg-black text-white overflow-hidden">
+        <div className="items-center flex flex-col">
+          <Home />
+          <FloatingDock 
+          items={items}
+          desktopClassName='fixed bottom-12 left-1/2 transform -translate-x-1/2'
+          mobileClassName="fixed bottom-4 right-6 z-50"
+          />
+        </div>
+        
+        <div className="pointer-events-none w-full h-full absolute inset-0">
+          <SparklesCore 
+            id="sparkles"
+            className="w-full h-full"
+            background="transparent"
+            minSize={1}
+            maxSize={1}
+            speed={4}
+            particleColor="#ffffff"
+            particleDensity={10}
+          />
+        </div>
       </div>
         
     </>
