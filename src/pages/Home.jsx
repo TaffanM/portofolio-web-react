@@ -10,7 +10,7 @@ const words = [
   "UI/UX Enthusiast",
 ]
 
-export const Home = () => {
+export const Home = ({ onNavigate }) => {
   return (
     <section className="relative flex items-center justify-center h-screen w-screen"> 
         <div className="z-10 text-center text-5xl space-y-6 px-4 max-md:px-2 max-md:text-3xl">
@@ -23,7 +23,7 @@ export const Home = () => {
             </div>
             <HoverBorderGradient
               as="button"
-              href="#about"
+              onClick={() => onNavigate('about')}
               className="text-lg font-medium bg-[#222831] hover:bg-[#393E46] transition-colors duration-300 text-white px-6 py-3 rounded-full"
               containerClassName="mx-auto mt-8"
               duration={1}
