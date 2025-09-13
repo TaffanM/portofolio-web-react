@@ -7,6 +7,7 @@ import InfoIcon from 'assets/icons/info.svg?react';
 import ProjectsIcon from 'assets/icons/projects.svg?react';
 import ContactIcon from 'assets/icons/contact.svg?react';
 import { SparklesCore } from 'components/ui/sparkles';  
+import Logo from 'assets/taffan.svg?react';
 
 
 
@@ -20,8 +21,13 @@ function App() {
 
   return (
     <>
-      <div className="w-full h-full bg-black text-white overflow-hidden">
+      <div className="w-full h-full bg-[#1E201E] text-white overflow-hidden">
         <div className="items-center flex flex-col">
+          <div className="fixed justify-between p-4">
+            <nav className="flex space-x-4">
+              <Logo className="w-24 h-24" href="#" />
+            </nav>
+          </div>
           <Home />
           <FloatingDock 
           items={items}

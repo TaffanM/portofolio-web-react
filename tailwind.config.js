@@ -17,23 +17,16 @@ export default {
       },
     extend: {
       colors: {
-        transparent: 'transparent',
-        current: 'currentColor',
-        white: {
-          primary: '#ffffff',
-          primaryFade: '#F4F2F1'
-        },
-        black: '#000000',
-        red: {
-          primary: '#D91E15',
-          primary900: '#Fbe8e7',
-          primary200: '#e14b44'
-        },
-        purple: {
-          primary: '#301C67',
-          primary900: '#eae8ef',
-          secondary: '#4d368a'
-        }
+        'white-primary': '#ffffff',
+        'white-primaryFade': '#F4F2F1',
+        'black-primary': '#000000',
+        'black-background': '#222831',
+        'red-primary': '#D91E15',
+        'red-primary900': '#Fbe8e7',
+        'red-primary200': '#e14b44',
+        'purple-primary': '#301C67',
+        'purple-primary900': '#eae8ef',
+        'purple-secondary': '#4d368a'
       },
       screens: {
         'max-md': { 'max': '768px' },
