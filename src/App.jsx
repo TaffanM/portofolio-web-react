@@ -12,6 +12,7 @@ import ContactIcon from 'assets/icons/contact.svg?react';
 import { SparklesCore } from 'components/ui/sparkles';  
 import Logo from 'assets/taffan.svg?react';
 import { AnimatePresence, motion } from 'motion/react';
+import { useMemo } from 'react';
 
 
 function App() {
@@ -20,6 +21,22 @@ function App() {
   const handleNavigation = (page) => {
     setCurrentPage(page)
   }
+
+  // Memoize the SparklesCore to prevent re-rendering
+  const sparklesComponent = useMemo(() => (
+    <div className="pointer-events-none w-full h-full fixed inset-0 z-0">
+      <SparklesCore 
+        id="sparkles"
+        className="w-full h-full"
+        background="transparent"
+        minSize={1}
+        maxSize={1}
+        speed={4}
+        particleColor="#ffffff"
+        particleDensity={10}
+      />
+    </div>
+  ), []); // Empty dependency array means it only renders once
 
   const pages = {
     home: <Home onNavigate={handleNavigation} />,
@@ -38,14 +55,34 @@ function App() {
   return (
     <>
       <div className="w-full h-full bg-[#1E201E] text-white overflow-hidden">
-        <div className="items-center flex flex-col">
-          <div className="fixed top-0 left-0 z-50 p-4">
-            <nav className="flex space-x-4">
-             <button onClick={() => handleNavigation('home')}>
-                <Logo className="w-24 h-24 hover:scale-110 transition-transform duration-300" />
-              </button>
-            </nav>
-          </div>
+        {/* Memoized SparklesCore */}
+        {sparklesComponent}
+
+        {/* Logo */}
+        <div className="fixed top-0 left-0 z-50 p-4">
+          <nav className="flex space-x-4">
+           <button onClick={() => handleNavigation('home')}>
+              <Logo className="w-24 h-24 hover:scale-110 transition-transform duration-300" />
+            </button>
+          </nav>
+        </div>
+
+        {/* FloatingDock */}
+        <FloatingDock 
+          items={items}
+          desktopClassName='fixed bottom-12 left-1/2 transform -translate-x-1/2 z-50'
+          mobileClassName="fixed bottom-4 right-6 z-50"
+        />
+
+        {/* Copyright */}
+        <div className="fixed bottom-0 right-0 z-50 p-4 select-none">
+          <nav className="flex space-x-4">
+            <span className="text-sm text-gray-400">© 2025 Taffan Muhammad Rizqi</span>
+          </nav>
+        </div>
+
+        {/* Page content container */}
+        <div className="relative z-10 w-full h-full">
           <AnimatePresence mode='wait'>
             <motion.div
               key={currentPage}
@@ -58,24 +95,6 @@ function App() {
               {pages[currentPage]}
             </motion.div>
           </AnimatePresence>
-          <FloatingDock 
-          items={items}
-          desktopClassName='fixed bottom-12 left-1/2 transform -translate-x-1/2 z-50'
-          mobileClassName="fixed bottom-4 right-6 z-50"
-          />
-        </div>
-        
-        <div className="pointer-events-none w-full h-full absolute inset-0">
-          <SparklesCore 
-            id="sparkles"
-            className="w-full h-full"
-            background="transparent"
-            minSize={1}
-            maxSize={1}
-            speed={4}
-            particleColor="#ffffff"
-            particleDensity={10}
-          />
         </div>
       </div>
     </>
