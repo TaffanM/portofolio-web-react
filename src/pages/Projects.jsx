@@ -6,42 +6,61 @@ import { IconExternalLink, IconBrandGithub, IconArrowLeft } from '@tabler/icons-
 
 const projectsData = [
   {
-    title: "E-Commerce Mobile App",
-    description: "A full-featured e-commerce mobile application built with React Native and Kotlin. Features include user authentication, product catalog, shopping cart, and payment integration.",
-    technologies: ["React Native", "Kotlin", "Firebase", "Stripe API"],
-    image: "https://via.placeholder.com/400x300/4A5568/FFFFFF?text=E-Commerce+App",
-    githubLink: "https://github.com/yourusername/ecommerce-app",
-    liveLink: "https://your-app-store-link.com",
+    title: "BinaSehat Health App",
+    description: "A mobile health application that helps users track body stats, manage nutrition, and exercise routines. Features include REST API integration, motion tracking for exercise, and a dark mode option.",
+    technologies: ["Kotlin", "Jetpack Compose", "REST API", "SQLite", "Motion Tracking"],
+    image: "https://via.placeholder.com/400x300/4A5568/FFFFFF?text=BinaSehat+App",
+    githubLink: "https://github.com/yourusername/bina-sehat",
+    liveLink: "https://play.google.com/store/apps/details?id=bina.sehat",
     category: "Mobile Development"
   },
   {
-    title: "AI Task Manager",
-    description: "An intelligent task management system powered by machine learning that predicts task priorities and suggests optimal scheduling based on user behavior patterns.",
-    technologies: ["Python", "TensorFlow", "React", "Node.js", "PostgreSQL"],
-    image: "https://via.placeholder.com/400x300/2D3748/FFFFFF?text=AI+Task+Manager",
-    githubLink: "https://github.com/yourusername/ai-task-manager",
-    liveLink: "https://ai-task-manager-demo.com",
-    category: "AI/ML & Web"
+    title: "Nadamu Learning Mobile App",
+    description: "A voice-controlled learning assistant app powered by PicoVoice wake-word detection. Allows users to interact hands-free and integrates backend services with PostgreSQL.",
+    technologies: ["Flutter", "PicoVoice", "PostgreSQL"],
+    image: "https://via.placeholder.com/400x300/2D3748/FFFFFF?text=Nadamu+App",
+    githubLink: "https://github.com/yourusername/nadamu",
+    liveLink: "https://your-nadamu-demo.com",
+    category: "Mobile Development"
   },
   {
-    title: "Real-time Chat Platform",
-    description: "A modern real-time messaging platform with end-to-end encryption, file sharing, and video calling capabilities. Built with scalability in mind.",
-    technologies: ["Next.js", "Socket.io", "WebRTC", "MongoDB", "AWS"],
-    image: "https://via.placeholder.com/400x300/1A202C/FFFFFF?text=Chat+Platform",
-    githubLink: "https://github.com/yourusername/chat-platform",
-    liveLink: "https://chat-platform-demo.com",
-    category: "Full Stack Web"
+    title: "Guest Management App",
+    description: "An Android app for managing guest attendance with features like digital signatures, document selection, automatic PDF export, and Google Drive integration.",
+    technologies: ["Kotlin", "Room Database", "MVVM", "PDF Export", "Google Drive API"],
+    image: "https://via.placeholder.com/400x300/1A202C/FFFFFF?text=Guest+App",
+    githubLink: "https://github.com/yourusername/guest-management-app",
+    liveLink: "https://play.google.com/store/apps/details?id=guest.app",
+    category: "Mobile Development"
   },
   {
-    title: "IoT Weather Station",
-    description: "An IoT-based weather monitoring system with mobile app integration. Collects environmental data and provides real-time weather insights with predictive analytics.",
-    technologies: ["Arduino", "Flutter", "Firebase", "Python", "TensorFlow"],
-    image: "https://via.placeholder.com/400x300/2B6CB0/FFFFFF?text=Weather+Station",
-    githubLink: "https://github.com/yourusername/iot-weather",
-    liveLink: "https://weather-dashboard-demo.com",
-    category: "IoT & Mobile"
+    title: "Company Profile Website",
+    description: "A modern, responsive company profile website built with React and Tailwind CSS. Supports internationalization with react-i18next and includes experience showcase pages.",
+    technologies: ["React", "Tailwind CSS", "i18next", "Adobe PDF Embed"],
+    image: "https://via.placeholder.com/400x300/2B6CB0/FFFFFF?text=Company+Profile",
+    githubLink: "https://github.com/yourusername/company-profile",
+    liveLink: "https://your-company.com",
+    category: "Web Development"
+  },
+  {
+    title: "NutriSight App",
+    description: "A nutrition-focused mobile app providing food databases, detail screens, and user-friendly UI for tracking dietary intake.",
+    technologies: ["Kotlin", "MVVM"],
+    image: "https://via.placeholder.com/400x300/38A169/FFFFFF?text=NutriSight",
+    githubLink: "https://github.com/Nutrisight-capstone-nutrisight-app/Nutrisight-Android-App",
+    liveLink: "https://play.google.com/store/apps/details?id=nutrisight.app",
+    category: "Mobile Development"
+  },
+  {
+    title: "Adaptive Traffic Signal Control using DQN",
+    description: "Undergraduate thesis project evaluating Deep Q-Network (DQN) for adaptive traffic signal control at a major Jakarta intersection using SUMO simulation. Compared reinforcement learning performance against Webster fixed-time control, showing improvements in vehicle flow efficiency and fairness metrics.",
+    technologies: ["Python", "PyTorch", "SUMO", "Reinforcement Learning"],
+    image: "https://via.placeholder.com/400x300/805AD5/FFFFFF?text=DQN+Traffic+Control",
+    githubLink: "https://github.com/yourusername/traffic-dqn",
+    liveLink: "",
+    category: "Research & Simulation"
   }
 ]
+
 
 const ProjectCard = ({ project, index }) => {
   const containerVariants = {

@@ -10,9 +10,11 @@ import InfoIcon from 'assets/icons/info.svg?react';
 import ProjectsIcon from 'assets/icons/projects.svg?react';
 import ContactIcon from 'assets/icons/contact.svg?react';
 import { SparklesCore } from 'components/ui/sparkles';  
+import { SocialDock } from 'components/ui/social-button'
 import Logo from 'assets/taffan.svg?react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useMemo } from 'react';
+import { IconBrandGithub, IconBrandGmail, IconBrandLinkedin } from '@tabler/icons-react'
 
 
 function App() {
@@ -52,6 +54,27 @@ function App() {
     { title: 'Contact', icon: <ContactIcon />, href: '#contact', onClick: () => handleNavigation('contact') },
   ]
 
+  const socialLinks = [
+    {
+      name: 'Email',
+      icon: <IconBrandGmail className='w-5 h-5' />,
+      href: 'mailto:taffanm@gmail.com',
+      color: 'dark:bg-neutral-900 hover:bg-red-600'
+    },
+    {
+      name: 'LinkedIn',
+      icon: <IconBrandLinkedin className='w-5 h-5' />,
+      href: 'https://www.linkedin.com/in/taffan-muhammad-rizqi/',
+      color: 'dark:bg-neutral-900 hover:bg-blue-600'
+    },
+    {
+      name: 'GitHub',
+      icon: <IconBrandGithub className='w-5 h-5' />,
+      href: 'https://github.com/TaffanM',
+      color: 'dark:bg-neutral-900 hover:bg-gray-700'
+    }
+  ]
+
   return (
     <>
       <div className="w-full h-full bg-[#1E201E] text-white overflow-hidden">
@@ -62,7 +85,7 @@ function App() {
         <div className="fixed top-0 left-0 z-50 p-4">
           <nav className="flex space-x-4">
            <button onClick={() => handleNavigation('home')}>
-              <Logo className="w-24 h-24 hover:scale-110 transition-transform duration-300" />
+              <Logo className="w-24 h-24 hover:scale-110 transition-transform duration-300 max-md:w-14 max-md:h-14" />
             </button>
           </nav>
         </div>
@@ -71,15 +94,12 @@ function App() {
         <FloatingDock 
           items={items}
           desktopClassName='fixed bottom-12 left-1/2 transform -translate-x-1/2 z-50'
-          mobileClassName="fixed bottom-4 right-6 z-50"
+          mobileClassName="fixed bottom-12 right-6 z-50"
         />
 
-        {/* Copyright */}
-        <div className="fixed bottom-0 right-0 z-50 p-4 select-none">
-          <nav className="flex space-x-4">
-            <span className="text-sm text-gray-400">© 2025 Taffan Muhammad Rizqi</span>
-          </nav>
-        </div>
+        
+        {/* Contact Me Button */}
+        <SocialDock />
 
         {/* Page content container */}
         <div className="relative z-10 w-full h-full">

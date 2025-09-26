@@ -56,42 +56,79 @@ const FloatingDockMobile = ({
         {open && (
           <motion.div
             layoutId="nav"
-            className="absolute inset-x-0 bottom-full mb-2 flex flex-col gap-2"
+            className="absolute right-0 bottom-full mb-4 flex flex-col gap-3"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.2 }}
           >
             {items.map((item, idx) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, x: 20 }}
                 animate={{
                   opacity: 1,
-                  y: 0,
+                  x: 0,
                 }}
                 exit={{
                   opacity: 0,
-                  y: 10,
+                  x: 20,
                   transition: {
-                    delay: idx * 0.05,
+                    delay: (items.length - 1 - idx) * 0.05,
                   },
                 }}
-                transition={{ delay: (items.length - 1 - idx) * 0.05 }}
+                transition={{ delay: idx * 0.1 }}
               >
-                <button
+                <motion.button
                   onClick={() => handleItemClick(item)}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-900"
+                  className="relative flex h-12 w-12 items-center justify-center rounded-full dark:bg-neutral-900 backdrop-blur-sm border border-gray-600 hover:border-gray-400 transition-colors duration-200"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <div className="h-4 w-4">{item.icon}</div>
-                </button>
+                  <div className="h-5 w-5 text-white [&>svg]:w-5 [&>svg]:h-5 [&>svg]:text-white flex items-center justify-center">
+                    {item.icon}
+                  </div>
+                  
+                  {/* Tooltip */}
+                  <motion.div
+                    className="absolute right-full mr-3 top-1/2 -translate-y-1/2 dark:bg-neutral-900 text-white px-2 py-1 rounded text-xs font-medium pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                    style={{ whiteSpace: 'nowrap' }}
+                    initial={{ opacity: 0, x: 10 }}
+                    whileHover={{ opacity: 1, x: 0 }}
+                  >
+                    {item.title}
+                    <div className="absolute left-full top-1/2 -translate-y-1/2 w-0 h-0 border-t-2 border-b-2 border-l-2 border-transparent border-l-gray-900"></div>
+                  </motion.div>
+                </motion.button>
               </motion.div>
             ))}
           </motion.div>
         )}
       </AnimatePresence>
-      <button
+      
+      {/* Mobile trigger button */}
+      <motion.button
         onClick={() => setOpen(!open)}
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-800"
+        className="flex h-12 w-12 items-center justify-center rounded-full dark:bg-neutral-900 backdrop-blur-sm border border-gray-600 hover:border-gray-400 transition-all duration-200"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        animate={{ rotate: open ? 45 : 0 }}
       >
-        <IconLayoutNavbarCollapse className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />
-      </button>
+        <IconLayoutNavbarCollapse className="h-5 w-5 text-white" />
+      </motion.button>
+
+      {/* Background overlay when menu is open */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-[-1]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -137,7 +174,6 @@ function IconContainer({
 
   let distance = useTransform(mouseX, (val) => {
     let bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
-
     return val - bounds.x - bounds.width / 2;
   });
 
@@ -175,41 +211,44 @@ function IconContainer({
 
   const [hovered, setHovered] = useState(false);
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation(); // Prevent event bubbling
+  const handleClick = () => {
     if (onClick) {
       onClick();
     }
   };
 
   return (
-    <motion.div
-      ref={ref}
-      style={{ width, height }}
+    <button
+      onClick={handleClick}
+      className="relative flex aspect-square items-center justify-center rounded-full bg-gray-200 dark:bg-neutral-800 cursor-pointer border-none outline-none p-0 m-0"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative flex aspect-square items-center justify-center rounded-full bg-gray-200 dark:bg-neutral-800 cursor-pointer"
-      onClick={handleClick}
     >
-      <AnimatePresence>
-        {hovered && (
-          <motion.div
-            initial={{ opacity: 0, y: 10, x: "-50%" }}
-            animate={{ opacity: 1, y: 0, x: "-50%" }}
-            exit={{ opacity: 0, y: 2, x: "-50%" }}
-            className="absolute -top-8 left-1/2 w-fit rounded-md border border-gray-200 bg-gray-100 px-2 py-0.5 text-s whitespace-pre text-neutral-700 dark:border-neutral-900 dark:bg-neutral-800 dark:text-white pointer-events-none"
-          >
-            {title}
-          </motion.div>
-        )}
-      </AnimatePresence>
       <motion.div
-        style={{ width: widthIcon, height: heightIcon }}
-        className="flex items-center justify-center pointer-events-none"
+        ref={ref}
+        style={{ width, height }}
+        className="relative flex aspect-square items-center justify-center rounded-full bg-gray-200 dark:bg-neutral-800"
+        whileTap={{ scale: 0.95 }}
       >
-        {icon}
+        <AnimatePresence>
+          {hovered && (
+            <motion.div
+              initial={{ opacity: 0, y: 10, x: "-50%" }}
+              animate={{ opacity: 1, y: 0, x: "-50%" }}
+              exit={{ opacity: 0, y: 2, x: "-50%" }}
+              className="absolute -top-8 left-1/2 w-fit rounded-md border border-gray-200 bg-gray-100 px-2 py-0.5 text-s whitespace-pre text-neutral-700 dark:border-neutral-900 dark:bg-neutral-800 dark:text-white pointer-events-none z-50"
+            >
+              {title}
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <motion.div
+          style={{ width: widthIcon, height: heightIcon }}
+          className="flex items-center justify-center pointer-events-none"
+        >
+          {icon}
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </button>
   );
 }
