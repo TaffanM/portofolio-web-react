@@ -2,12 +2,15 @@
   "name": "personal-web",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://taffanm.github.io/portofolio-web-react",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@tabler/icons-react": "^3.31.0",
@@ -30,6 +33,7 @@
     "eslint": "^9.25.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
+    "gh-pages": "^6.3.0",
     "globals": "^16.0.0",
     "vite": "^6.3.5",
     "vite-plugin-svgr": "^4.3.0"
