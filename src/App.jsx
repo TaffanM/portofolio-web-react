@@ -24,6 +24,40 @@ function App() {
     setCurrentPage(page)
   }
 
+  // Scroll reset function
+  const resetScroll = () => {
+    // Multiple methods to ensure scroll reset works on all devices
+    window.scrollTo({ top: 0, behavior: 'instant' })
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+    
+    const containers = [
+      document.querySelector('[data-scroll-container]'),
+      document.querySelector('.overflow-y-auto'),
+      document.querySelector('main'),
+      document.body
+    ]
+    
+    containers.forEach(container => {
+      if (container) {
+        container.scrollTop = 0
+      }
+    })
+  }
+
+  useEffect(() => {
+    // Delay scroll reset until after the animation duration (0.5s) + small buffer
+    const scrollResetTimer = setTimeout(() => {
+      resetScroll()
+      
+      // Additional resets for stubborn mobile browsers
+      setTimeout(resetScroll, 50)
+      setTimeout(resetScroll, 100)
+    }, 550) // 550ms = 500ms animation + 50ms buffer
+
+    return () => clearTimeout(scrollResetTimer)
+  }, [currentPage])
+
   // Memoize the SparklesCore to prevent re-rendering
   const sparklesComponent = useMemo(() => (
     <div className="pointer-events-none w-full h-full fixed inset-0 z-0">
@@ -102,7 +136,11 @@ function App() {
         <SocialDock />
 
         {/* Page content container */}
-        <div className="relative z-10 w-full h-full">
+        <div 
+          className="relative z-10 w-full h-full"
+          data-scroll-container
+          style={{ scrollBehavior: 'auto' }}
+          >
           <AnimatePresence mode='wait'>
             <motion.div
               key={currentPage}
