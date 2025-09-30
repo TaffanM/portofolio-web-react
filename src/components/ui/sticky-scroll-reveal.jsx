@@ -52,12 +52,12 @@ export const StickyScroll = ({
       animate={{
         backgroundColor: backgroundColors[activeCard % backgroundColors.length],
       }}
-      className="relative flex h-[30rem] justify-center space-x-10 overflow-y-auto rounded-md p-10"
+      className="relative flex flex-col lg:flex-row h-auto min-h-[30rem] lg:h-[30rem] justify-center lg:space-x-10 overflow-y-auto rounded-md p-4 sm:p-6 lg:p-10"
       ref={ref}>
-      <div className="div relative flex items-start px-4">
-        <div className="max-w-2xl">
+      <div className="relative flex items-start w-full lg:w-auto px-2 sm:px-4">
+        <div className="max-w-2xl w-full">
           {content.map((item, index) => (
-            <div key={item.title + index} className="my-20">
+            <div key={item.title + index} className="my-12 sm:my-16 lg:my-20">
               <motion.h2
                 initial={{
                   opacity: 0,
@@ -65,7 +65,7 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className="text-2xl font-bold text-slate-100">
+                className="text-xl sm:text-2xl font-bold text-slate-100">
                 {item.title}
               </motion.h2>
               <motion.p
@@ -75,18 +75,32 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className="text-kg mt-10 max-w-sm text-slate-300">
+                className="text-sm sm:text-base mt-6 lg:mt-10 max-w-full lg:max-w-sm text-slate-300">
                 {item.description}
               </motion.p>
             </div>
           ))}
-          <div className="h-40" />
+          <div className="h-20 lg:h-40" />
         </div>
       </div>
+      
+      {/* Mobile: Show active content below text */}
+      <div className="block lg:hidden mt-8 w-full">
+        <div
+          style={{ background: backgroundGradient }}
+          className={cn(
+            "w-full h-48 sm:h-60 overflow-hidden rounded-md bg-white",
+            contentClassName
+          )}>
+          {content[activeCard].content ?? null}
+        </div>
+      </div>
+
+      {/* Desktop: Sticky sidebar */}
       <div
         style={{ background: backgroundGradient }}
         className={cn(
-          "sticky top-10 hidden h-60 w-80 overflow-hidden rounded-md bg-white lg:block",
+          "sticky top-10 hidden lg:block h-60 w-80 overflow-hidden rounded-md bg-white flex-shrink-0",
           contentClassName
         )}>
         {content[activeCard].content ?? null}

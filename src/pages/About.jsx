@@ -119,7 +119,7 @@ export const About = ({ onNavigate }) => {
               variants={itemVariants}
               className="text-lg sm:text-xl text-gray-300 mb-4 sm:mb-6"
             >
-              Software Engineer
+              Software Developer
             </motion.p>
 
             {/* Social Media - Mobile */}
@@ -297,7 +297,7 @@ export const About = ({ onNavigate }) => {
               variants={itemVariants}
               className="text-xl text-gray-300 mb-6"
             >
-              Software Engineer
+              Software Developer
             </motion.p>
 
             {/* Social Media - Desktop */}

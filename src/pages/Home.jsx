@@ -13,11 +13,11 @@ const words = [
 export const Home = ({ onNavigate }) => {
   return (
     <section className="relative flex items-center justify-center h-screen w-screen"> 
-        <div className="z-10 text-center text-5xl space-y-6 px-4 max-md:px-2 max-md:text-2xl">
+        <div className="z-10 text-center font-bold text-5xl space-y-6 px-4 max-md:px-2 max-md:text-2xl">
             <h1>Hi</h1>
             <div className="flex flex-row justify-center items-center gap-2 max-md:flex-col">
               <h1>I'm Taffan Muhammad Rizqi, a</h1>
-              <div className="w-120 max-lg:w-[40rem] max-md:w-full text-left max-md:text-center">
+              <div className="w-125 max-lg:w-[40rem] max-md:w-full text-left max-md:text-center">
                 <FlipWords words={words} duration={2000} />
               </div>
             </div>
