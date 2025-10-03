@@ -27,7 +27,7 @@ const projectsData = [
     title: "NutriSight App",
     description: "A nutrition-focused mobile app providing food databases, detail screens, and user-friendly UI for tracking dietary intake.",
     technologies: ["Kotlin", "MVVM"],
-    image: "https://via.placeholder.com/400x300/38A169/FFFFFF?text=NutriSight",
+    image: "/images/NutriSight.png",
     githubLink: "https://github.com/Nutrisight-capstone-nutrisight-app/Nutrisight-Android-App",
     liveLink: "https://play.google.com/store/apps/details?id=nutrisight.app",
     category: "Mobile Development"
@@ -36,7 +36,7 @@ const projectsData = [
     title: "Guest Management App",
     description: "An Android app for managing guest attendance with features like digital signatures, document selection, automatic PDF export, and Google Drive integration.",
     technologies: ["Kotlin", "Room Database", "MVVM", "PDF Export", "Google Drive API"],
-    image: "https://via.placeholder.com/400x300/1A202C/FFFFFF?text=Guest+App",
+    image: "/images/GuestApp.png",
     githubLink: "https://github.com/yourusername/guest-management-app",
     liveLink: "https://play.google.com/store/apps/details?id=guest.app",
     category: "Mobile Development"
@@ -45,7 +45,7 @@ const projectsData = [
     title: "Company Profile Website",
     description: "A modern, responsive company profile website built with React and Tailwind CSS. Supports internationalization with react-i18next and includes experience showcase pages.",
     technologies: ["React", "Tailwind CSS", "i18next", "Adobe PDF Embed"],
-    image: "https://via.placeholder.com/400x300/2B6CB0/FFFFFF?text=Company+Profile",
+    image: "/images/compro.png",
     githubLink: "https://github.com/yourusername/company-profile",
     liveLink: "https://your-company.com",
     category: "Web Development"
@@ -54,7 +54,7 @@ const projectsData = [
     title: "Adaptive Traffic Signal Control using DQN",
     description: "Undergraduate thesis project evaluating Deep Q-Network (DQN) for adaptive traffic signal control at a major Jakarta intersection using SUMO simulation. Compared reinforcement learning performance against Webster fixed-time control, showing improvements in vehicle flow efficiency and fairness metrics.",
     technologies: ["Python", "PyTorch", "SUMO", "Reinforcement Learning"],
-    image: "https://via.placeholder.com/400x300/805AD5/FFFFFF?text=DQN+Traffic+Control",
+    image: "/images/TA.png",
     githubLink: "https://github.com/yourusername/traffic-dqn",
     liveLink: "",
     category: "Research & Simulation"

@@ -65,11 +65,11 @@ function App() {
         id="sparkles"
         className="w-full h-full"
         background="transparent"
-        minSize={1}
+        minSize={0.5}
         maxSize={1}
         speed={4}
         particleColor="#ffffff"
-        particleDensity={10}
+        particleDensity={3}
       />
     </div>
   ), []); // Empty dependency array means it only renders once
