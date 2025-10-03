@@ -5,20 +5,38 @@ import { Home } from 'pages/Home'
 import { About } from 'pages/About'
 import { Projects } from 'pages/Projects'
 import { Contact } from 'pages/Contact'
-import HomeIcon from 'assets/icons/home.svg?react';
-import InfoIcon from 'assets/icons/info.svg?react';
-import ProjectsIcon from 'assets/icons/projects.svg?react';
-import ContactIcon from 'assets/icons/contact.svg?react';
-import { SparklesCore } from 'components/ui/sparkles';  
+import HomeIcon from 'assets/icons/home.svg?react'
+import InfoIcon from 'assets/icons/info.svg?react'
+import ProjectsIcon from 'assets/icons/projects.svg?react'
+import ContactIcon from 'assets/icons/contact.svg?react'
+import { SparklesCore } from 'components/ui/sparkles' 
 import { SocialDock } from 'components/ui/social-button'
 import Logo from 'assets/taffan.svg?react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react'
 import { useMemo } from 'react';
 import { IconBrandGithub, IconBrandGmail, IconBrandLinkedin } from '@tabler/icons-react'
+import { useImagePreloader } from 'hooks/useImagePreloader'
 
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
+
+  useEffect(() => {
+    const imageUrls = [
+      "/images/BinaSehat.png",
+      "/images/nadamu.png",
+      "/images/NutriSight.png",
+      "/images/GuestApp.png",
+      "/images/compro.png",
+      "/images/TA.png"
+    ]
+    
+    imageUrls.forEach(url => {
+      const img = new Image()
+      img.src = url
+    })
+  }, [])
+  
 
   const handleNavigation = (page) => {
     setCurrentPage(page)
@@ -86,27 +104,6 @@ function App() {
     { title: 'About', icon: <InfoIcon />, href: '#about', onClick: () => handleNavigation('about') },
     { title: 'Projects', icon: <ProjectsIcon />, href: '#projects', onClick: () => handleNavigation('projects') },
     { title: 'Contact', icon: <ContactIcon />, href: '#contact', onClick: () => handleNavigation('contact') },
-  ]
-
-  const socialLinks = [
-    {
-      name: 'Email',
-      icon: <IconBrandGmail className='w-5 h-5' />,
-      href: 'mailto:taffanm@gmail.com',
-      color: 'dark:bg-neutral-900 hover:bg-red-600'
-    },
-    {
-      name: 'LinkedIn',
-      icon: <IconBrandLinkedin className='w-5 h-5' />,
-      href: 'https://www.linkedin.com/in/taffan-muhammad-rizqi/',
-      color: 'dark:bg-neutral-900 hover:bg-blue-600'
-    },
-    {
-      name: 'GitHub',
-      icon: <IconBrandGithub className='w-5 h-5' />,
-      href: 'https://github.com/TaffanM',
-      color: 'dark:bg-neutral-900 hover:bg-gray-700'
-    }
   ]
 
   return (
