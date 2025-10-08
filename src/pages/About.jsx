@@ -370,26 +370,26 @@ export const About = ({ onNavigate }) => {
                   <HoverBorderGradient
                     as="button"
                     onClick={() => setShowCV(true)}
-                    className="text-lg font-medium bg-[#222831] hover:bg-[#393E46] transition-colors duration-300 text-white px-4 py-2 rounded-full flex items-center gap-2"
+                    className="text-m font-medium bg-[#222831] hover:bg-[#393E46] transition-colors duration-300 text-white px-4 py-2 rounded-full flex items-center gap-2"
                     containerClassName=""
                     duration={1}
                     clockwise={true}
                   >
                     <IconEye className="w-5 h-5" />
-                    View CV
+                    View my CV
                   </HoverBorderGradient>
 
                   <HoverBorderGradient
                     as="a"
-                    href="/path-to-your-cv.pdf"
+                    href="/assets/cv.pdf"
                     download="Taffan_Muhammad_Rizqi_CV.pdf"
-                    className="text-lg font-medium bg-[#222831] hover:bg-[#393E46] transition-colors duration-300 text-white px-4 py-2 rounded-full flex items-center gap-2"
+                    className="text-m font-medium bg-[#222831] hover:bg-[#393E46] transition-colors duration-300 text-white px-4 py-2 rounded-full flex items-center gap-2"
                     containerClassName=""
                     duration={1}
                     clockwise={false}
                   >
                     <IconDownload className="w-5 h-5" />
-                    Download CV
+                    Download
                   </HoverBorderGradient>
                 </motion.div>
               </div>

@@ -14,8 +14,6 @@ import { SocialDock } from 'components/ui/social-button'
 import Logo from 'assets/taffan.svg?react';
 import { AnimatePresence, motion } from 'motion/react'
 import { useMemo } from 'react';
-import { IconBrandGithub, IconBrandGmail, IconBrandLinkedin } from '@tabler/icons-react'
-import { useImagePreloader } from 'hooks/useImagePreloader'
 
 
 function App() {

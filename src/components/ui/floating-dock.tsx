@@ -81,7 +81,7 @@ const FloatingDockMobile = ({
               >
                 <motion.button
                   onClick={() => handleItemClick(item)}
-                  className="relative flex h-12 w-12 items-center justify-center rounded-full dark:bg-neutral-900 backdrop-blur-sm border border-gray-600 hover:border-gray-400 transition-colors duration-200"
+                  className="relative flex h-12 w-12 items-center justify-center rounded-full bg-neutral-900 backdrop-blur-sm border border-gray-600 hover:border-gray-400 transition-colors duration-200"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -91,7 +91,7 @@ const FloatingDockMobile = ({
                   
                   {/* Tooltip */}
                   <motion.div
-                    className="absolute right-full mr-3 top-1/2 -translate-y-1/2 dark:bg-neutral-900 text-white px-2 py-1 rounded text-xs font-medium pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                    className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-neutral-900 text-white px-2 py-1 rounded text-xs font-medium pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200"
                     style={{ whiteSpace: 'nowrap' }}
                     initial={{ opacity: 0, x: 10 }}
                     whileHover={{ opacity: 1, x: 0 }}
@@ -109,7 +109,7 @@ const FloatingDockMobile = ({
       {/* Mobile trigger button */}
       <motion.button
         onClick={() => setOpen(!open)}
-        className="flex h-12 w-12 items-center justify-center rounded-full dark:bg-neutral-900 backdrop-blur-sm border border-gray-600 hover:border-gray-400 transition-all duration-200"
+        className="flex h-12 w-12 items-center justify-center rounded-full bg-neutral-900 backdrop-blur-sm border border-gray-600 hover:border-gray-400 transition-all duration-200"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         animate={{ rotate: open ? 45 : 0 }}
@@ -146,7 +146,7 @@ const FloatingDockDesktop = ({
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto hidden h-20 items-end gap-4 rounded-2xl bg-gray-50 px-4 pb-3 md:flex dark:bg-neutral-900",
+        "mx-auto hidden h-20 items-end gap-4 rounded-2xl px-4 pb-3 md:flex bg-neutral-900",
         className,
       )}
     >
@@ -220,14 +220,14 @@ function IconContainer({
   return (
     <button
       onClick={handleClick}
-      className="relative flex aspect-square items-center justify-center rounded-full bg-gray-200 dark:bg-neutral-800 cursor-pointer border-none outline-none p-0 m-0"
+      className="relative flex aspect-square items-center justify-center rounded-full bg-neutral-800 cursor-pointer border-none outline-none p-0 m-0"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <motion.div
         ref={ref}
         style={{ width, height }}
-        className="relative flex aspect-square items-center justify-center rounded-full bg-gray-200 dark:bg-neutral-800"
+        className="relative flex aspect-square items-center justify-center rounded-full bg-neutral-800"
         whileTap={{ scale: 0.95 }}
       >
         <AnimatePresence>
@@ -236,7 +236,7 @@ function IconContainer({
               initial={{ opacity: 0, y: 10, x: "-50%" }}
               animate={{ opacity: 1, y: 0, x: "-50%" }}
               exit={{ opacity: 0, y: 2, x: "-50%" }}
-              className="absolute -top-8 left-1/2 w-fit rounded-md border border-gray-200 bg-gray-100 px-2 py-0.5 text-s whitespace-pre text-neutral-700 dark:border-neutral-900 dark:bg-neutral-800 dark:text-white pointer-events-none z-50"
+              className="absolute -top-8 left-1/2 w-fit rounded-md border px-2 py-0.5 text-s whitespace-pre border-neutral-900 bg-neutral-800 text-white pointer-events-none z-50"
             >
               {title}
             </motion.div>
