@@ -202,7 +202,7 @@ export const About = ({ onNavigate }) => {
 
                 <HoverBorderGradient
                   as="a"
-                  href="/path-to-your-cv.pdf"
+                  href={cv}
                   download="Taffan_Muhammad_Rizqi_CV.pdf"
                   className="text-base sm:text-lg font-medium bg-[#222831] hover:bg-[#393E46] transition-colors duration-300 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full flex items-center gap-2 w-full sm:w-auto justify-center"
                   containerClassName=""
@@ -381,7 +381,7 @@ export const About = ({ onNavigate }) => {
 
                   <HoverBorderGradient
                     as="a"
-                    href="/assets/cv.pdf"
+                    href={cv}
                     download="Taffan_Muhammad_Rizqi_CV.pdf"
                     className="text-m font-medium bg-[#222831] hover:bg-[#393E46] transition-colors duration-300 text-white px-4 py-2 rounded-full flex items-center gap-2"
                     containerClassName=""
