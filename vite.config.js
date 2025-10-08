@@ -9,7 +9,11 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    svgr(),
+    svgr({
+      svgrOptions: {
+        titleProp: true,
+      }
+    }),
   ],
   base: '/',
   resolve: {
@@ -20,5 +24,28 @@ export default defineConfig({
       pages: path.resolve(__dirname, 'src/pages'),
       utils: path.resolve(__dirname, 'src/utils'),
     },
+  },
+  build: {
+    target: 'es2015',
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          motion: ['motion/react'],
+          particles: ['@tsparticles/react', '@tsparticles/slim'],
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000,
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'motion/react', '@tsparticles/react', '@tsparticles/slim']
   }
 })
