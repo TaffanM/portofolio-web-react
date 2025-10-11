@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 @import "tailwindcss";
 
+@layer utilities {
+  .safari-blur-sm { -webkit-backdrop-filter: blur(4px);  backdrop-filter: blur(4px); }
+  .safari-blur-md { -webkit-backdrop-filter: blur(8px);  backdrop-filter: blur(8px); }
+  .safari-blur-lg { -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+}
+
 @layer base {
     html {
         scroll-behavior: smooth;

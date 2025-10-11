@@ -1,16 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import { IconBrandLinkedin, IconBrandGithub, IconMail, IconUser, IconMessageCircle, IconSend, IconCheck } from '@tabler/icons-react'
+import { IconBrandLinkedin, IconBrandGithub, IconMail, IconUser, IconMessageCircle, IconSend, IconCheck, IconX } from '@tabler/icons-react' // Added IconX
+import emailjs from '@emailjs/browser'
 
 export const Contact = ({ onNavigate }) => {
+  const form = useRef()
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    from_name: '',
+    from_email: '',
     subject: '',
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState(null)
+  const [errorMessage, setErrorMessage] = useState('')
+
+  // EmailJS configuration
+  const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
+  const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+  const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
   const handleInputChange = (e) => {
     setFormData({
@@ -22,17 +30,46 @@ export const Contact = ({ onNavigate }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setIsSubmitted(true)
-      // Reset form after 3 seconds
+    setErrorMessage('')
+
+    try {
+      const result = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.from_name,
+          from_email: formData.from_email,
+          subject: formData.subject,
+          message: formData.message,
+          date: new Date().toLocaleString()
+        },
+        EMAILJS_PUBLIC_KEY
+      )
+      console.log('Email successfully sent!', result.text)
+      setSubmitStatus('success')
+
+      setFormData({
+        from_name: '',
+        from_email: '',
+        subject: '',
+        message: ''
+      })
+
       setTimeout(() => {
-        setIsSubmitted(false)
-        setFormData({ name: '', email: '', subject: '', message: '' })
-      }, 3000)
-    }, 2000)
+        setSubmitStatus(null)
+      }, 5000)
+
+    } catch (error) {
+      console.error('Error sending email:', error)
+      setSubmitStatus('error')
+      setErrorMessage('Failed to send email. Please try again later.')
+      setTimeout(() => {
+        setSubmitStatus(null)
+        setErrorMessage('')
+      }, 5000)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const containerVariants = {
@@ -106,7 +143,8 @@ export const Contact = ({ onNavigate }) => {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             {/* Contact Form */}
             <motion.div variants={itemVariants}>
-              <div className="relative p-6 sm:p-8 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/20 transition-all duration-300">
+              <div className="relative p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all duration-300"
+                   style={{ backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}>
                 {/* Glass effect overlay */}
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
                 
@@ -114,9 +152,77 @@ export const Contact = ({ onNavigate }) => {
                   <h2 className="text-2xl sm:text-3xl font-semibold mb-6 text-white">Send a Message</h2>
                   
                   <AnimatePresence mode="wait">
-                    {!isSubmitted ? (
+                    {submitStatus === 'success' ? (
+                      <motion.div
+                        key="success"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        className="text-center py-12"
+                      >
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                          className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+                        >
+                          <IconCheck className="w-8 h-8 text-white" />
+                        </motion.div>
+                        <h3 className="text-xl font-semibold text-white mb-2">Message Sent!</h3>
+                        <p className="text-gray-300">Thank you for reaching out. I'll get back to you soon.</p>
+                        <motion.button
+                          onClick={() => setSubmitStatus(null)}
+                          className="mt-4 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white text-sm transition-colors"
+                          style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          Send Another Message
+                        </motion.button>
+                      </motion.div>
+                    ) : submitStatus === 'error' ? (
+                      <motion.div
+                        key="error"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        className="text-center py-12"
+                      >
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                          className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4"
+                        >
+                          <IconX className="w-8 h-8 text-white" />
+                        </motion.div>
+                        <h3 className="text-xl font-semibold text-white mb-2">Oops! Something went wrong</h3>
+                        <p className="text-gray-300 text-sm mb-4">{errorMessage}</p>
+                        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                          <motion.button
+                            onClick={() => setSubmitStatus(null)}
+                            className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white text-sm transition-colors"
+                            style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            Try Again
+                          </motion.button>
+                          <motion.a
+                            href="mailto:taffanm@gmail.com"
+                            className="px-4 py-2 bg-blue-500/20 hover:bg-blue-500/30 rounded-lg text-white text-sm transition-colors border border-blue-400/30"
+                            style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            Email Directly
+                          </motion.a>
+                        </div>
+                      </motion.div>
+                    ) : (
                       <motion.form
                         key="form"
+                        ref={form}
                         initial={{ opacity: 1 }}
                         exit={{ opacity: 0, scale: 0.95 }}
                         transition={{ duration: 0.3 }}
@@ -133,11 +239,12 @@ export const Contact = ({ onNavigate }) => {
                             <input
                               type="text"
                               id="name"
-                              name="name"
-                              value={formData.name}
+                              name="from_name"
+                              value={formData.from_name}
                               onChange={handleInputChange}
                               required
-                              className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/20 rounded-xl focus:border-white/40 focus:ring-2 focus:ring-white/20 focus:outline-none transition-all duration-200 text-white placeholder-gray-400 backdrop-blur-sm"
+                              className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/20 rounded-xl focus:border-white/40 focus:ring-2 focus:ring-white/20 focus:outline-none transition-all duration-200 text-white placeholder-gray-400"
+                              style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
                               placeholder="Enter your name"
                             />
                           </div>
@@ -153,11 +260,12 @@ export const Contact = ({ onNavigate }) => {
                             <input
                               type="email"
                               id="email"
-                              name="email"
-                              value={formData.email}
+                              name="from_email"
+                              value={formData.from_email}
                               onChange={handleInputChange}
                               required
-                              className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/20 rounded-xl focus:border-white/40 focus:ring-2 focus:ring-white/20 focus:outline-none transition-all duration-200 text-white placeholder-gray-400 backdrop-blur-sm"
+                              className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/20 rounded-xl focus:border-white/40 focus:ring-2 focus:ring-white/20 focus:outline-none transition-all duration-200 text-white placeholder-gray-400"
+                              style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
                               placeholder="Enter your email"
                             />
                           </div>
@@ -175,7 +283,8 @@ export const Contact = ({ onNavigate }) => {
                             value={formData.subject}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl focus:border-white/40 focus:ring-2 focus:ring-white/20 focus:outline-none transition-all duration-200 text-white placeholder-gray-400 backdrop-blur-sm"
+                            className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl focus:border-white/40 focus:ring-2 focus:ring-white/20 focus:outline-none transition-all duration-200 text-white placeholder-gray-400"
+                            style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
                             placeholder="What's this about?"
                           />
                         </div>
@@ -194,7 +303,8 @@ export const Contact = ({ onNavigate }) => {
                               value={formData.message}
                               onChange={handleInputChange}
                               required
-                              className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/20 rounded-xl focus:border-white/40 focus:ring-2 focus:ring-white/20 focus:outline-none transition-all duration-200 text-white placeholder-gray-400 backdrop-blur-sm resize-none"
+                              className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/20 rounded-xl focus:border-white/40 focus:ring-2 focus:ring-white/20 focus:outline-none transition-all duration-200 text-white placeholder-gray-400 resize-none"
+                              style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
                               placeholder="Tell me about your project or just say hello..."
                             />
                           </div>
@@ -225,24 +335,6 @@ export const Contact = ({ onNavigate }) => {
                           )}
                         </motion.button>
                       </motion.form>
-                    ) : (
-                      <motion.div
-                        key="success"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="text-center py-12"
-                      >
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                          className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
-                        >
-                          <IconCheck className="w-8 h-8 text-white" />
-                        </motion.div>
-                        <h3 className="text-xl font-semibold text-white mb-2">Message Sent!</h3>
-                        <p className="text-gray-300">Thank you for reaching out. I'll get back to you soon.</p>
-                      </motion.div>
                     )}
                   </AnimatePresence>
                 </div>
@@ -260,7 +352,8 @@ export const Contact = ({ onNavigate }) => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`block p-4 sm:p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 transition-all duration-300 ${social.color} group`}
+                    className={`block p-4 sm:p-6 rounded-2xl bg-white/5 border border-white/10 transition-all duration-300 ${social.color} group`}
+                    style={{ backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}
                     whileHover={{ scale: 1.02, y: -2 }}
                     whileTap={{ scale: 0.98 }}
                     initial={{ opacity: 0, x: 30 }}
@@ -291,7 +384,8 @@ export const Contact = ({ onNavigate }) => {
               {/* Additional Info */}
               <motion.div
                 variants={itemVariants}
-                className="p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20"
+                className="p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20"
+                style={{ backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}
               >
                 <h4 className="text-lg font-medium text-white mb-3">Quick Info</h4>
                 <div className="space-y-2 text-sm text-gray-300">
@@ -305,9 +399,9 @@ export const Contact = ({ onNavigate }) => {
         </motion.div>
       </div>
 
-      {/* Copyright at bottom of page content */}
+      {/* Copyright */}
       <div className="mt-12 pb-20 text-center">
-        <span className="text-sm text-gray-500">© 2025 Taffan Muhammad Rizqi</span>
+        <span className="text-sm text-gray-400 max-md:text-xs">© 2025 Taffan Muhammad Rizqi</span>
       </div>
     </section>
   )
