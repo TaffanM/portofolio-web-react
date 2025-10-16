@@ -8,7 +8,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="e498be44-724b-4f94-b143-e5ad33ec03ef"></script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="e498be44-724b-4f94-b143-e5ad33ec03ef">
+      (function() {
+      const redirect = sessionStorage.redirect;
+      if (redirect) {
+        sessionStorage.removeItem('redirect');
+        history.replaceState(null, null, redirect);
+      }
+    })();
+    </script>
     <script type="module" crossorigin src="/assets/index-BnPUHmnu.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/vendor-BI3NJeJA.js">
     <link rel="modulepreload" crossorigin href="/assets/motion-Cuzaab9h.js">
