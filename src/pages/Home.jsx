@@ -1,6 +1,7 @@
 import React from 'react'
 import { FlipWords } from 'components/ui/flip-words'
 import { HoverBorderGradient } from 'components/ui/hover-border-gradient'
+import { useNavigate } from 'react-router-dom'
 
 const words = [
   "Software Developer",
@@ -10,7 +11,13 @@ const words = [
   "UI/UX Enthusiast",
 ]
 
-export const Home = ({ onNavigate }) => {
+export const Home = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/about");
+  };
+
   return (
     <section className="relative flex items-center justify-center h-screen w-screen"> 
         <div className="z-10 text-center font-bold text-5xl space-y-6 px-4 max-md:px-2 max-md:text-2xl">
@@ -23,7 +30,7 @@ export const Home = ({ onNavigate }) => {
             </div>
             <HoverBorderGradient
               as="button"
-              onClick={() => onNavigate('about')}
+              onClick={handleClick}
               className="text-lg font-medium bg-[#222831] hover:bg-[#393E46] transition-colors duration-300 text-white px-6 py-3 rounded-full max-md:text-m"
               containerClassName="mx-auto mt-8"
               duration={1}

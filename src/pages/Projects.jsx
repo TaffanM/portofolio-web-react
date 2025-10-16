@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { TracingBeam } from '../components/ui/tracing-beams'
 import { motion } from 'motion/react'
 import { HoverBorderGradient } from '../components/ui/hover-border-gradient'
@@ -161,7 +162,13 @@ const ProjectCard = ({ project, index }) => {
   )
 }
 
-export const Projects = ({ onNavigate }) => {
+export const Projects = () => {
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate('/contact')
+  }
+
   const headerVariants = {
     hidden: { opacity: 0, y: -30 },
     visible: {
@@ -220,7 +227,7 @@ export const Projects = ({ onNavigate }) => {
           <div className="flex justify-center">
             <HoverBorderGradient
               as="button"
-              onClick={() => onNavigate('contact')}
+              onClick={handleClick}
               className="text-base sm:text-lg font-medium bg-[#222831] hover:bg-[#393E46] transition-colors duration-300 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full"
               containerClassName=""
               duration={1}

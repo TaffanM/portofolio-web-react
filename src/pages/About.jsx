@@ -5,9 +5,15 @@ import { IconBrandLinkedin, IconBrandGithub, IconDownload, IconEye, IconX, IconB
 import { PixelatedCanvas } from 'components/ui/pixelated-canvas'
 import profilePhoto from 'assets/photo.jpeg'
 import cv from 'assets/cv.pdf'
+import { useNavigate } from 'react-router-dom'
 
-export const About = ({ onNavigate }) => {
+export const About = () => {
   const [showCV, setShowCV] = useState(false)
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate('/projects')
+  }
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -152,7 +158,7 @@ export const About = ({ onNavigate }) => {
             >
               <HoverBorderGradient
                 as="button"
-                onClick={() => onNavigate('projects')}
+                onClick={handleClick}
                 className="text-base sm:text-lg font-medium bg-[#222831] hover:bg-[#393E46] transition-colors duration-300 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full"
                 containerClassName=""
                 duration={1}
@@ -330,7 +336,7 @@ export const About = ({ onNavigate }) => {
             >
               <HoverBorderGradient
                 as="button"
-                onClick={() => onNavigate('projects')}
+                onClick={handleClick}
                 className="text-lg font-medium bg-[#222831] hover:bg-[#393E46] transition-colors duration-300 text-white px-8 py-3 rounded-full"
                 containerClassName=""
                 duration={1}
