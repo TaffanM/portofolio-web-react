@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import './App.css'
 import { FloatingDock } from 'components/ui/floating-dock'
 import { Home } from 'pages/Home'
@@ -39,9 +39,9 @@ function PageContainer({ children}) {
 function MainApp() {
   const navigate = useNavigate()
 
-  const handleNavigation = (path) => {
+  const handleNavigation = useCallback((path) => {
     navigate(path)
-  }
+  }, [navigate])
 
   // Scroll reset function
   const resetScroll = () => {
@@ -74,7 +74,7 @@ function MainApp() {
     }, 550)
 
     return () => clearTimeout(scrollResetTimer)
-  }, [handleNavigation])
+  }, [location.pathname])
 
   // Memoize the SparklesCore to prevent re-rendering
   const sparklesComponent = useMemo(() => (
@@ -92,12 +92,6 @@ function MainApp() {
     </div>
   ), []);
 
-  const pages = {
-    home: <Home onNavigate={handleNavigation} />,
-    about: <About onNavigate={handleNavigation} />,
-    projects: <Projects onNavigate={handleNavigation} />,
-    contact: <Contact onNavigate={handleNavigation} />,
-  }
   
   const items = [
     { title: 'Home', icon: <HomeIcon />, href: '#home', onClick: () => handleNavigation('/') },
