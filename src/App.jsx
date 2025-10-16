@@ -40,9 +40,41 @@ function MainApp() {
   const navigate = useNavigate()
 
   const handleNavigation = (path) => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
     navigate(path)
   }
+
+  // Scroll reset function
+  const resetScroll = () => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+    
+    const containers = [
+      document.querySelector('[data-scroll-container]'),
+      document.querySelector('.overflow-y-auto'),
+      document.querySelector('main'),
+      document.body
+    ]
+    
+    containers.forEach(container => {
+      if (container) {
+        container.scrollTop = 0
+      }
+    })
+  }
+
+  useEffect(() => {
+    // Delay scroll reset until after the animation duration (0.5s) + small buffer
+    const scrollResetTimer = setTimeout(() => {
+      resetScroll()
+      
+      
+      setTimeout(resetScroll, 50)
+      setTimeout(resetScroll, 100)
+    }, 550)
+
+    return () => clearTimeout(scrollResetTimer)
+  }, [handleNavigation])
 
   // Memoize the SparklesCore to prevent re-rendering
   const sparklesComponent = useMemo(() => (
