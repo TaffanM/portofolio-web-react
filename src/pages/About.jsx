@@ -190,7 +190,7 @@ export const About = () => {
           >
             <HoverBorderGradient
               as="button"
-              onClick={() => onNavigate('projects')}
+              onClick={handleClick}
               className="text-base sm:text-lg font-medium bg-[#222831] hover:bg-[#393E46] transition-colors duration-300 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full"
               containerClassName=""
               duration={1}
