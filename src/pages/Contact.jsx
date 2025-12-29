@@ -46,6 +46,7 @@ export const Contact = ({ onNavigate }) => {
         EMAILJS_PUBLIC_KEY
       )
       console.log('Email successfully sent!', result.text)
+      console.log("EmailJS result:", result)
       setSubmitStatus('success')
 
       setFormData({
