@@ -102,7 +102,7 @@ export const Contact = ({ onNavigate }) => {
       icon: <IconBrandLinkedin className="w-6 h-6" />,
       href: 'https://www.linkedin.com/in/taffan-muhammad-rizqi/',
       color: 'hover:bg-blue-500/20 hover:border-blue-400',
-      description: 'Connect professionally'
+      description: 'Connect with me'
     },
     {
       name: 'GitHub',
@@ -136,7 +136,7 @@ export const Contact = ({ onNavigate }) => {
               Get In Touch
             </h1>
             <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
-              Let's discuss your next project or just say hello. I'm always open to new opportunities and interesting conversations.
+              Let's discuss or just say hello. I'm always open to new opportunities.
             </p>
           </motion.div>
 
@@ -306,7 +306,7 @@ export const Contact = ({ onNavigate }) => {
                               required
                               className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/20 rounded-xl focus:border-white/40 focus:ring-2 focus:ring-white/20 focus:outline-none transition-all duration-200 text-white placeholder-gray-400 resize-none"
                               style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
-                              placeholder="Tell me about your project or just say hello..."
+                              placeholder="Say hello..."
                             />
                           </div>
                         </div>
@@ -390,9 +390,9 @@ export const Contact = ({ onNavigate }) => {
               >
                 <h4 className="text-lg font-medium text-white mb-3">Quick Info</h4>
                 <div className="space-y-2 text-sm text-gray-300">
-                  <p>📍 Based in Indonesia</p>
-                  <p>⚡ Usually responds within 24 hours</p>
-                  <p>🌍 Available for remote opportunities</p>
+                  <p>Based in Indonesia</p>
+                  <p>Usually responds within 24 hours</p>
+                  <p>Available as soon as possible</p>
                 </div>
               </motion.div>
             </motion.div>
