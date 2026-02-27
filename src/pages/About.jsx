@@ -211,13 +211,13 @@ export const About = () => {
           </h2>
           <div className="space-y-4 sm:space-y-5 text-gray-300 leading-relaxed text-sm sm:text-base lg:text-lg max-w-3xl mx-auto">
             <p>
-              As a passionate Informatics graduate from Institut Teknologi Nasional Bandung (ITENAS), Taffan has developed a strong interest in mobile development and emerging technologies. Taffan is eager to collaborate on innovative projects and contribute meaningful solutions to the tech industry.
+               An informatics graduate from Institut Teknologi Nasional Bandung with strong skills in software engineering, system development, and applied machine learning.
             </p>
             <p>
-              With a solid foundation in Kotlin, Java, Object-Oriented Programming (OOP), Python, React, Tailwind, and UI/UX design, Taffan is committed to continuously enhancing his skills and staying current with the latest advancements in the field.
+              Proficient in mobile development (Kotlin, Flutter), Python, REST API, and web development (React, Tailwind CSS). Experienced in AI/ML with TensorFlow and Keras, and familiar with tools like Git, AWS, and Docker.
             </p>
             <p>
-              While Taffan has limited working proficiency in English, Taffan is dedicated to improving his language skills to facilitate broader communication and collaboration.
+              Adept at problem-solving, teamwork, and adapting quickly to new technologies through internships and projects.
             </p>
           </div>
           
