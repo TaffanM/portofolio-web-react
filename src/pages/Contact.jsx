@@ -127,7 +127,8 @@ export const Contact = ({ onNavigate }) => {
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
           className="z-10 max-w-6xl mx-auto w-full"
         >
           {/* Header */}
@@ -358,7 +359,8 @@ export const Contact = ({ onNavigate }) => {
                     whileHover={{ scale: 1.02, y: -2 }}
                     whileTap={{ scale: 0.98 }}
                     initial={{ opacity: 0, x: 30 }}
-                    animate={{ opacity: 1, x: 0 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
                     transition={{ delay: index * 0.1, duration: 0.1, ease: "easeOut" }}
                   >
                     <div className="flex items-center gap-4">
@@ -402,7 +404,7 @@ export const Contact = ({ onNavigate }) => {
 
       {/* Copyright */}
       <div className="mt-12 pb-20 text-center">
-        <span className="text-sm text-gray-400 max-md:text-xs">© 2025 Taffan Muhammad Rizqi</span>
+        <span className="text-sm text-gray-400 max-md:text-xs">© 2026 Taffan Muhammad Rizqi</span>
       </div>
     </section>
   )

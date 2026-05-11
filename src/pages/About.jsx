@@ -6,14 +6,13 @@ import { PixelatedCanvas } from 'components/ui/pixelated-canvas'
 import MagicBento from 'components/ui/MagicBento'
 import profilePhoto from 'assets/photo.jpeg'
 import cv from 'assets/cv.pdf'
-import { useNavigate } from 'react-router-dom'
+
 
 export const About = () => {
   const [showCV, setShowCV] = useState(false)
-  const navigate = useNavigate()
-
   const handleClick = () => {
-    navigate('/projects')
+    const element = document.getElementById('projects')
+    if (element) element.scrollIntoView({ behavior: 'smooth' })
   }
 
   const containerVariants = {
@@ -110,7 +109,8 @@ export const About = () => {
       <motion.div
         variants={containerVariants}
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
         className="z-10 max-w-4xl mx-auto w-full space-y-12 sm:space-y-16 lg:space-y-20"
       >
         {/* Profile Section */}
@@ -175,7 +175,8 @@ export const About = () => {
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ y: 10, opacity: 0.9 }}
-                animate={{ y: 0, opacity: 1 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
                 transition={{ delay: 0.5 + index * 0.1 }}
               >
                 {social.icon}
@@ -263,7 +264,8 @@ export const About = () => {
           </h2>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.3 }}
             className="flex justify-center"
           >
@@ -284,10 +286,7 @@ export const About = () => {
         </motion.div>
       </motion.div>
 
-      {/* Copyright */}
-      <div className="absolute bottom-0 right-0 z-50 p-4 select-none">
-        <span className="text-sm text-gray-400 max-md:text-xs">© 2025 Taffan Muhammad Rizqi</span>
-      </div>
+
 
       {/* CV Modal */}
       <AnimatePresence>

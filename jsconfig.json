@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
       "jsx": "react-jsx",
-      "baseUrl": "src" // optional: allows absolute imports like 'components/Navbar'
+      "baseUrl": "src", // optional: allows absolute imports like 'components/Navbar'
+      "ignoreDeprecations": "5.0" // silences deprecation warning for baseUrl until TS 7.0
     },
     "include": ["src"]
   }

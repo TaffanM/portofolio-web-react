@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+
 import { TracingBeam } from '../components/ui/tracing-beams'
 import { motion } from 'motion/react'
 import { HoverBorderGradient } from '../components/ui/hover-border-gradient'
@@ -11,8 +11,7 @@ const projectsData = [
     description: "A mobile health application that helps users track body stats, manage nutrition, and exercise routines. Features include REST API integration, motion tracking for exercise, and a dark mode option.",
     technologies: ["Kotlin", "Jetpack Compose", "REST API", "SQLite", "Motion Tracking"],
     image: "/images/BinaSehat.png",
-    githubLink: "https://github.com/yourusername/bina-sehat",
-    liveLink: "https://play.google.com/store/apps/details?id=bina.sehat",
+    githubLink: "https://github.com/TaffanM/binasehat",
     category: "Mobile Development"
   },
   {
@@ -20,8 +19,6 @@ const projectsData = [
     description: "A voice-controlled learning assistant app powered by PicoVoice wake-word detection. Allows users to interact hands-free and integrates backend services with PostgreSQL.",
     technologies: ["Flutter", "PicoVoice", "PostgreSQL"],
     image: "/images/nadamu.png",
-    githubLink: "https://github.com/yourusername/nadamu",
-    liveLink: "https://your-nadamu-demo.com",
     category: "Mobile Development"
   },
   {
@@ -30,7 +27,6 @@ const projectsData = [
     technologies: ["Kotlin", "MVVM"],
     image: "/images/NutriSight.png",
     githubLink: "https://github.com/Nutrisight-capstone-nutrisight-app/Nutrisight-Android-App",
-    liveLink: "https://play.google.com/store/apps/details?id=nutrisight.app",
     category: "Mobile Development"
   },
   {
@@ -38,17 +34,21 @@ const projectsData = [
     description: "An Android app for managing guest attendance with features like digital signatures, document selection, automatic PDF export, and Google Drive integration.",
     technologies: ["Kotlin", "Room Database", "MVVM", "PDF Export", "Google Drive API"],
     image: "/images/GuestApp.png",
-    githubLink: "https://github.com/yourusername/guest-management-app",
-    liveLink: "https://play.google.com/store/apps/details?id=guest.app",
     category: "Mobile Development"
   },
   {
     title: "Company Profile Website",
     description: "A modern, responsive company profile website built with React and Tailwind CSS. Supports internationalization with react-i18next and includes experience showcase pages.",
-    technologies: ["React", "Tailwind CSS", "i18next", "Adobe PDF Embed"],
+    technologies: ["React", "Tailwind CSS", "i18next", "Adobe PDF Embed", "Vite", "Framer Motion"],
     image: "/images/compro.png",
-    githubLink: "https://github.com/yourusername/company-profile",
-    liveLink: "https://your-company.com",
+    liveLink: "https://galensagara.com",
+    category: "Web Development"
+  },
+  {
+    title: "Company Profile CMS Dashboard",
+    description: "A content management system dashboard for the company profile website, built with Next.js and Supabase. Allows administrators to manage experience content, with a user-friendly interface.",
+    technologies: ["Next.js", "PostgreSQL", "Supabase", "React Query", "Tailwind CSS"],
+    image: "/images/cms.png",
     category: "Web Development"
   },
   {
@@ -56,8 +56,6 @@ const projectsData = [
     description: "Undergraduate thesis project evaluating Deep Q-Network (DQN) for adaptive traffic signal control at a major Jakarta intersection using SUMO simulation. Compared reinforcement learning performance against Webster fixed-time control, showing improvements in vehicle flow efficiency and fairness metrics.",
     technologies: ["Python", "PyTorch", "SUMO", "Reinforcement Learning"],
     image: "/images/TA.png",
-    githubLink: "https://github.com/yourusername/traffic-dqn",
-    liveLink: "",
     category: "Research & Simulation"
   }
 ]
@@ -130,17 +128,19 @@ const ProjectCard = ({ project, index }) => {
 
           {/* Action Buttons */}
           <div className="flex flex-row gap-3 sm:gap-4">
-            <HoverBorderGradient
-              as="a"
-              href={project.githubLink}
-              target="_blank"
-              rel="noopener noreferrer"
+            {project.githubLink && (
+              <HoverBorderGradient
+                as="a"
+                href={project.githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 px-4 py-2 bg-gray-800 text-white hover:bg-gray-700 transition-colors text-sm sm:text-base lg:text-lg font-medium duration-300 rounded-full"
               duration={1}
             >
               <IconBrandGithub className="w-4 h-4" />
               Code
             </HoverBorderGradient>
+            )}
             
             {project.liveLink && (
               <HoverBorderGradient
@@ -163,10 +163,9 @@ const ProjectCard = ({ project, index }) => {
 }
 
 export const Projects = () => {
-  const navigate = useNavigate()
-
   const handleClick = () => {
-    navigate('/contact')
+    const element = document.getElementById('contact')
+    if (element) element.scrollIntoView({ behavior: 'smooth' })
   }
 
   const headerVariants = {
@@ -189,7 +188,8 @@ export const Projects = () => {
         <motion.div
           variants={headerVariants}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
           className="text-center mb-12 sm:mb-16"
         >
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-clip-text text-white">
@@ -239,10 +239,7 @@ export const Projects = () => {
         </motion.div>
       </div>
 
-      {/* Copyright at bottom of page content */}
-      <div className="mt-12 pb-20 text-center">
-        <span className="text-sm text-gray-500">© 2025 Taffan Muhammad Rizqi</span>
-      </div>
+
     </section>
   )
 }

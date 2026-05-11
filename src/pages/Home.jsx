@@ -1,7 +1,7 @@
 import React from 'react'
 import { FlipWords } from 'components/ui/flip-words'
 import { HoverBorderGradient } from 'components/ui/hover-border-gradient'
-import { useNavigate } from 'react-router-dom'
+
 
 const words = [
   "Software Developer",
@@ -12,10 +12,9 @@ const words = [
 ]
 
 export const Home = () => {
-  const navigate = useNavigate();
-
   const handleClick = () => {
-    navigate("/about");
+    const element = document.getElementById('about');
+    if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -38,12 +37,6 @@ export const Home = () => {
             >
               Learn More About Me!
             </HoverBorderGradient>
-        </div>
-        {/* Copyright */}
-        <div className="fixed bottom-0 right-0 z-50 p-4 select-none">
-          <nav className="flex space-x-4">
-            <span className="text-sm text-gray-400 max-md:text-xs">© 2025 Taffan Muhammad Rizqi</span>
-          </nav>
         </div>
     </section>
   )
